@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Equipos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Equipos</h1>
+        <!-- Corregido th:href para el nuevo equipo -->
+        <a th:href="@{/equipos/new}" class="btn btn-primary mb-3">Crear Nuevo Equipo</a>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Asociación</th>
+                    <th>Director</th>
+                    <th>Competiciones</th>
+                    <th>Jugadores</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Bucle para cada equipo -->
+                <tr th:each="equipo : ${equipos}">
+                    <!-- Mostrar nombre del equipo -->
+                    <td th:text="${equipo.nombre}">Nombre del equipo</td>
+                    
+                    <!-- Mostrar asociación, previniendo el caso de que sea nulo -->
+                    <td th:text="${equipo.asociacion != null ? equipo.asociacion.nombre : 'Sin Asociación'}">Asociación</td>
+                    
+                    <!-- Mostrar director, previniendo el caso de que sea nulo -->
+                    <td th:text="${equipo.director != null ? equipo.director.nombre : 'Sin Director'}">Director</td>
+                    
+                    <!-- Mostrar competiciones, previniendo lista vacía o nula -->
+                    <td>
+                        <ul>
+                            <li th:each="competicion : ${equipo.competicion}" th:text="${competicion.nombre}">Competición</li>
+                            <li th:if="${#lists.isEmpty(equipo.competicion)}">Sin competiciones</li>
+                        </ul>
+                    </td>
+                    
+                    <!-- Mostrar jugadores, previniendo lista vacía o nula -->
+                    <td>
+                        <ul>
+                            <li th:each="jugador : ${equipo.jugador}" th:text="${jugador.nombre}">Jugador</li>
+                            <li th:if="${#lists.isEmpty(equipo.jugador)}">Sin jugadores</li>
+                        </ul>
+                    </td>
+                    
+                    <!-- Botones de editar y eliminar -->
+                    <td>
+                        <a th:href="@{/equipos/edit/{id}(id=${equipo.id})}" class="btn btn-warning">Editar</a>
+                        <a th:href="@{/equipos/delete/{id}(id=${equipo.id})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

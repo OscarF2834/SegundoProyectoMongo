@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${equipo.id} != null ? 'Editar Equipo' : 'Crear Nuevo Equipo'"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${equipo.id} != null ? 'Editar Equipo' : 'Crear Nuevo Equipo'"></h1>
+        <form th:action="@{/equipos/save}" method="post">
+            <input type="hidden" th:if="${equipo.id}" name="id" th:value="${equipo.id}"/>
+
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" th:value="${equipo.nombre}" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="asociacion">Asociación</label>
+                <select id="asociacion" name="asociacionId" class="form-control" required>
+                    <option th:each="asociacion : ${asociaciones}" th:value="${asociacion.id}" th:text="${asociacion.nombre}">Asociación</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="director">Director</label>
+                <select id="director" name="directorId" class="form-control" required>
+                    <option th:each="director : ${directores}" th:value="${director.id}" th:text="${director.nombre}">Director</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="competiciones">Competiciones</label>
+                <select id="competiciones" name="competicionId" class="form-control" multiple required>
+                    <option th:each="competicion : ${competiciones}" th:value="${competicion.id}" th:text="${competicion.nombre}">Competición</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="jugadores">Jugadores</label>
+                <select id="jugadores" name="jugadorId" class="form-control" multiple required>
+                    <option th:each="jugador : ${jugadores}" th:value="${jugador.id}" th:text="${jugador.nombre}">Jugador</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/equipos/}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Jugador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 th:text="${jugador.id} != null ? 'Editar Jugador' : 'Nuevo Jugador'"></h1>
+        <form th:action="@{/jugadores/save}" th:object="${jugador}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" th:field="*{apellido}" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="numero">Número:</label>
+                <input type="number" class="form-control" id="numero" th:field="*{numero}" required min="0"/>
+            </div>
+
+            <div class="form-group">
+                <label for="posicion">Posición:</label>
+                <input type="text" class="form-control" id="posicion" th:field="*{posicion}" required/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="/jugadores/" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
