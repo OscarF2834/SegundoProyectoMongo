@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Asociación</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 th:text="${asociacion.id} != null ? 'Editar Asociación' : 'Nueva Asociación'"></h1>
+        <form th:action="@{/asociaciones/save}" th:object="${asociacion}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="pais">País:</label>
+                <input type="text" class="form-control" id="pais" th:field="*{pais}" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="presidente">Presidente:</label>
+                <input type="text" class="form-control" id="presidente" th:field="*{presidente}" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="siglas">Siglas:</label>
+                <input type="text" class="form-control" id="siglas" th:field="*{siglas}" required/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="/asociaciones/" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
